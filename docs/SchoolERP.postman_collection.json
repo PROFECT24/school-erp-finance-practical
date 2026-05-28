@@ -1,0 +1,72 @@
+{
+  "info": {
+    "name": "SchoolERP Finance APIs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://127.0.0.1:8000" }
+  ],
+  "item": [
+    {
+      "name": "API Login",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": { "mode": "urlencoded", "urlencoded": [
+          { "key": "email", "value": "admin@school.test", "type": "text" },
+          { "key": "password", "value": "password", "type": "text" }
+        ] },
+        "url": "{{base_url}}/api/login"
+      }
+    },
+    { "name": "Dashboard", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/dashboard" } },
+    { "name": "Financial Report", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/reports?from=2026-05-01&to=2026-05-31" } },
+    { "name": "List Income", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/incomes" } },
+    {
+      "name": "Create Income",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": { "mode": "urlencoded", "urlencoded": [
+          { "key": "student_name", "value": "New Student", "type": "text" },
+          { "key": "fee_type", "value": "Tuition Fee", "type": "text" },
+          { "key": "amount", "value": "15000", "type": "text" },
+          { "key": "payment_date", "value": "2026-05-20", "type": "text" }
+        ] },
+        "url": "{{base_url}}/api/incomes"
+      }
+    },
+    { "name": "List Expenses", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/expenses" } },
+    {
+      "name": "Create Expense",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": { "mode": "urlencoded", "urlencoded": [
+          { "key": "expense_title", "value": "Water Bill", "type": "text" },
+          { "key": "category", "value": "Utilities", "type": "text" },
+          { "key": "amount", "value": "2500", "type": "text" },
+          { "key": "expense_date", "value": "2026-05-21", "type": "text" }
+        ] },
+        "url": "{{base_url}}/api/expenses"
+      }
+    },
+    { "name": "List Payroll", "request": { "method": "GET", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/payrolls" } },
+    {
+      "name": "Create Payroll",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Accept", "value": "application/json" }],
+        "body": { "mode": "urlencoded", "urlencoded": [
+          { "key": "employee_name", "value": "New Teacher", "type": "text" },
+          { "key": "salary", "value": "30000", "type": "text" },
+          { "key": "bonus", "value": "2000", "type": "text" },
+          { "key": "deduction", "value": "1000", "type": "text" },
+          { "key": "payroll_date", "value": "2026-05-25", "type": "text" }
+        ] },
+        "url": "{{base_url}}/api/payrolls"
+      }
+    },
+    { "name": "API Logout", "request": { "method": "POST", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/logout" } }
+  ]
+}

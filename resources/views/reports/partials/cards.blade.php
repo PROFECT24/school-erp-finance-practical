@@ -1,0 +1,6 @@
+<div class="stats-grid">
+    <div class="stat-card"><div class="stat-icon green"><i class="fa-solid fa-money-bill-trend-up"></i></div><div class="stat-body"><div class="stat-label">Total Income</div><div class="stat-value">{{ number_format($totals['income'], 2) }}</div><div class="stat-change up">Fees collected</div></div></div>
+    <div class="stat-card"><div class="stat-icon red"><i class="fa-solid fa-arrow-trend-down"></i></div><div class="stat-body"><div class="stat-label">Total Expenses</div><div class="stat-value">{{ number_format($totals['expenses'], 2) }}</div><div class="stat-change down">Operational cost</div></div></div>
+    <div class="stat-card"><div class="stat-icon amber"><i class="fa-solid fa-wallet"></i></div><div class="stat-body"><div class="stat-label">Total Payroll</div><div class="stat-value">{{ number_format($totals['payroll'], 2) }}</div><div class="stat-change down">Net salaries</div></div></div>
+    <div class="stat-card"><div class="stat-icon blue"><i class="fa-solid fa-scale-balanced"></i></div><div class="stat-body"><div class="stat-label">Net Profit/Loss</div><div class="stat-value">{{ number_format($totals['profit'], 2) }}</div><div class="stat-change {{ $totals['profit'] >= 0 ? 'up' : 'down' }}">Income - (Expense + Payroll)</div></div></div>
+</div>
