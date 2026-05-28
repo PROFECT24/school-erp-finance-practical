@@ -87,7 +87,7 @@ CREATE TABLE `expenses` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -96,6 +96,7 @@ CREATE TABLE `expenses` (
 
 LOCK TABLES `expenses` WRITE;
 /*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
+INSERT INTO `expenses` VALUES (2,'Electricity Bill','Utilities',8500.00,'2026-05-10','2026-05-28 06:49:26','2026-05-28 06:49:26'),(3,'Classroom Stationery','Stationery',4300.00,'2026-05-12','2026-05-28 06:49:26','2026-05-28 06:49:26'),(4,'Computer Lab Maintenance','Maintenance',15000.00,'2026-05-16','2026-05-28 06:49:26','2026-05-28 06:49:26');
 /*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -146,7 +147,7 @@ CREATE TABLE `incomes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `incomes_receipt_number_unique` (`receipt_number`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,6 +156,7 @@ CREATE TABLE `incomes` (
 
 LOCK TABLES `incomes` WRITE;
 /*!40000 ALTER TABLE `incomes` DISABLE KEYS */;
+INSERT INTO `incomes` VALUES (2,'RCPT-202605-00001','Aarav Sharma','Tuition Fee',45000.00,'2026-05-05','2026-05-28 06:49:26','2026-05-28 06:49:26'),(3,'RCPT-202605-00002','Diya Mehta','Transport Fee',12000.00,'2026-05-08','2026-05-28 06:49:26','2026-05-28 06:49:26'),(4,'RCPT-202605-00003','Kabir Rao','Exam Fee',6500.00,'2026-05-14','2026-05-28 06:49:26','2026-05-28 06:49:26');
 /*!40000 ALTER TABLE `incomes` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -230,7 +232,7 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) NOT NULL,
   `batch` int NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -239,7 +241,7 @@ CREATE TABLE `migrations` (
 
 LOCK TABLES `migrations` WRITE;
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_05_28_104204_create_expenses_table',1),(5,'2026_05_28_104204_create_incomes_table',1),(6,'2026_05_28_104204_create_payrolls_table',1);
+INSERT INTO `migrations` VALUES (1,'0001_01_01_000000_create_users_table',1),(2,'0001_01_01_000001_create_cache_table',1),(3,'0001_01_01_000002_create_jobs_table',1),(4,'2026_05_28_104204_create_expenses_table',1),(5,'2026_05_28_104204_create_incomes_table',1),(6,'2026_05_28_104204_create_payrolls_table',1),(7,'2026_05_28_121718_create_personal_access_tokens_table',1);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -285,7 +287,7 @@ CREATE TABLE `payrolls` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -294,7 +296,42 @@ CREATE TABLE `payrolls` (
 
 LOCK TABLES `payrolls` WRITE;
 /*!40000 ALTER TABLE `payrolls` DISABLE KEYS */;
+INSERT INTO `payrolls` VALUES (2,'Neha Kapoor',35000.00,2500.00,1500.00,36000.00,'2026-05-25','2026-05-28 06:49:26','2026-05-28 06:49:26'),(3,'Rohan Das',28000.00,1000.00,1200.00,27800.00,'2026-05-25','2026-05-28 06:49:26','2026-05-28 06:49:26');
 /*!40000 ALTER TABLE `payrolls` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` text NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`),
+  KEY `personal_access_tokens_expires_at_index` (`expires_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -344,7 +381,7 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,6 +390,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (3,'School Admin','admin@school.test',NULL,'$2y$12$WUVcLv65kmiJqepZYRKs9OxcMALXyGJTy4yaMy1CkeTELrQ10tU0m',NULL,'2026-05-28 06:49:26','2026-05-28 06:49:26');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -365,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-05-28 17:08:36
+-- Dump completed on 2026-05-28 17:49:26

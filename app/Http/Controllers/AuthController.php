@@ -39,9 +39,15 @@ class AuthController extends Controller
             return response()->json(['message' => 'Invalid school admin credentials.'], 422);
         }
 
-        $request->session()->regenerate();
+        $user = $request->user();
+        $user->tokens()->where('name', 'school-admin-api')->delete();
 
-        return response()->json(['message' => 'Logged in', 'user' => $request->user()]);
+        return response()->json([
+            'message' => 'Logged in',
+            'token_type' => 'Bearer',
+            'access_token' => $user->createToken('school-admin-api')->plainTextToken,
+            'user' => $user,
+        ]);
     }
 
     public function logout(Request $request)
@@ -55,9 +61,7 @@ class AuthController extends Controller
 
     public function apiLogout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        $request->user()?->currentAccessToken()?->delete();
 
         return response()->json(['message' => 'Logged out']);
     }

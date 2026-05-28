@@ -12,7 +12,7 @@ Laravel 11 school finance system for the LeadNexa practical task. It integrates 
 - Dynamic dashboard cards for total income, expenses, payroll, and net profit/loss
 - Financial report with monthly or date-range filters
 - Financial summary PDF and Excel-compatible `.xls` export
-- Session-protected REST API endpoints under `/api`
+- Laravel Sanctum Bearer-token REST API endpoints under `/api`
 
 ## Setup
 
@@ -43,7 +43,11 @@ The current `.env` is configured for SQLite. For MySQL, update `DB_CONNECTION`, 
 
 ## REST APIs
 
-Use `POST /api/login` first, then keep the returned session cookie in Postman.
+Use `POST /api/login` first. The response returns `access_token`; send it as:
+
+```text
+Authorization: Bearer YOUR_TOKEN
+```
 
 - `GET /api/dashboard`
 - `GET /api/reports?from=2026-05-01&to=2026-05-31`
@@ -53,6 +57,7 @@ Use `POST /api/login` first, then keep the returned session cookie in Postman.
 - `GET|PUT|DELETE /api/expenses/{id}`
 - `GET|POST /api/payrolls`
 - `GET|PUT|DELETE /api/payrolls/{id}`
+- `POST /api/logout`
 
 ## Deliverables
 

@@ -1,15 +1,31 @@
 {
   "info": {
-    "name": "SchoolERP Finance APIs",
+    "name": "SchoolERP Finance APIs - Sanctum",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
-    { "key": "base_url", "value": "http://127.0.0.1:8000" }
+    { "key": "base_url", "value": "http://127.0.0.1:8000" },
+    { "key": "access_token", "value": "" }
   ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [{ "key": "token", "value": "{{access_token}}", "type": "string" }]
+  },
   "item": [
     {
-      "name": "API Login",
+      "name": "API Login - Get Sanctum Token",
+      "event": [{
+        "listen": "test",
+        "script": {
+          "exec": [
+            "const json = pm.response.json();",
+            "if (json.access_token) pm.collectionVariables.set('access_token', json.access_token);"
+          ],
+          "type": "text/javascript"
+        }
+      }],
       "request": {
+        "auth": { "type": "noauth" },
         "method": "POST",
         "header": [{ "key": "Accept", "value": "application/json" }],
         "body": { "mode": "urlencoded", "urlencoded": [
@@ -67,6 +83,6 @@
         "url": "{{base_url}}/api/payrolls"
       }
     },
-    { "name": "API Logout", "request": { "method": "POST", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/logout" } }
+    { "name": "API Logout - Revoke Current Token", "request": { "method": "POST", "header": [{ "key": "Accept", "value": "application/json" }], "url": "{{base_url}}/api/logout" } }
   ]
 }

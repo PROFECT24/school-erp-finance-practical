@@ -9,3 +9,4 @@ These are Claude/ChatGPT-compatible prompts used as the development plan for the
 5. Create professional DomPDF views for fee receipt PDF and financial summary PDF with print-ready tables.
 6. Add Excel-compatible financial report export from the same report data source used by the PDF and dashboard.
 7. Prepare README, SQL seed file, Postman collection, and tests for evaluator handoff.
+8. Refactor API authentication to Laravel Sanctum Bearer tokens and update Postman documentation.
